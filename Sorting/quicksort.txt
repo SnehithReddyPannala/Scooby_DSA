@@ -1,0 +1,41 @@
+class Solution {
+
+    public void quickSort(int[] arr, int low, int high) {
+        if (low < high) { // base case instead of while
+            int pIndex = partition(arr, low, high);
+            quickSort(arr, low, pIndex - 1);
+            quickSort(arr, pIndex + 1, high);
+        }
+    }
+
+    private int partition(int[] arr, int low, int high) {
+        int pivot = arr[low]; // choose first element as pivot
+        int i = low;
+        int j = high;
+
+        while (i < j) {
+            // Move i right until arr[i] > pivot
+            while (i <= high && arr[i] <= pivot) {
+                i++;
+            }
+            // Move j left until arr[j] <= pivot
+            while (j >= low && arr[j] > pivot) {
+                j--;
+            }
+
+            // Swap elements at i and j if still in correct range
+            if (i < j) {
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+
+        // Place pivot at its correct position
+        int temp = arr[low];
+        arr[low] = arr[j];
+        arr[j] = temp;
+
+        return j; // pivot index
+    }
+}
