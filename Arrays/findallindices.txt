@@ -1,0 +1,20 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        int[] arr = {4, 2, 4, 3, 2, 4};
+
+        // Map: element -> list of indices
+        Map<Integer, List<Integer>> indexMap = new HashMap<>();
+
+        for (int i = 0; i < arr.length; i++) {
+            indexMap.putIfAbsent(arr[i], new ArrayList<>());
+            indexMap.get(arr[i]).add(i);
+        }
+
+        // Print each element with its indices
+        for (Map.Entry<Integer, List<Integer>> entry : indexMap.entrySet()) {
+            System.out.println(entry.getKey() + " occurs at indices: " + entry.getValue());
+        }
+    }
+}

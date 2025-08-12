@@ -1,0 +1,11 @@
+Method	What it does	Example
+map.put(key, value)	Inserts a new key-value pair or updates existing value if the key already exists.	map.put(5, 2) → stores key 5 with value 2.
+map.get(key)	Returns the value associated with the key, or null if not found.	map.get(5) → returns 2.
+map.getOrDefault(key, defaultValue)	Returns value for the key, or the defaultValue if the key is not present.	map.getOrDefault(5, 0) → returns 2 if present, else 0.
+map.keySet()	Returns a Set of all keys.	Loop: for (int k : map.keySet())
+map.values()	Returns a Collection of all values.	Loop: for (int v : map.values())
+map.containsKey(key)	Checks if the key exists in the map.	map.containsKey(5) → true or false.
+map.containsValue(value)	Checks if any key has that value.	map.containsValue(1)
+map.remove(key)	Removes the key (and its value).	map.remove(5)
+map.size()	Returns the number of key-value pairs.	map.size()
+map.clear()	Removes all key-value pairs.	map.clear()

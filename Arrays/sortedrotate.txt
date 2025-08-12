@@ -1,0 +1,39 @@
+class Solution {
+    public boolean check(int[] nums) {
+        int count = 0;  // counts drops
+        int n = nums.length;
+             if(n==1)return true;
+        for (int i = 0; i < n; i++) {
+            // Compare current element with next element in circular fashion
+            if (nums[i] > nums[(i + 1) % n]) {
+                count++;
+                if (count > 1) {
+                    return false;  // More than 1 drop means not sorted rotated
+                }
+            }
+        }
+        return true;  // At most one drop found => valid sorted rotated
+    }
+}
+
+//other way
+class Solution {
+    public boolean check(int[] nums) {
+        int N = nums.length;
+        int count = 1;
+
+        for (int i = 1; i < 2 * N; i++) {
+            if (nums[(i - 1) % N] <= nums[i % N]) {
+                count++;
+            } else {
+                count = 1;
+            }
+
+            if (count == N) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+}

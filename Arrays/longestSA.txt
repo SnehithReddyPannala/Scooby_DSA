@@ -1,0 +1,56 @@
+// works for negatives and positives as well
+
+class Solution {
+    public int longestSubarray(int[] arr, int k) {
+        HashMap<Integer,Integer>map=new HashMap<>();
+        // code here
+        int n=arr.length;
+        int sum=0;
+        int maxLen=0;
+        for(int i=0;i<n;i++){
+            sum+=arr[i];
+            if(sum==k){
+                maxLen=Math.max(maxLen,i+1);
+            }
+            int rem=sum-k;
+            if(map.containsKey(rem)){
+                int len=i-map.get(rem);
+                maxLen=Math.max(maxLen,len);
+            }
+            if(!map.containsKey(sum)){
+                map.put(sum,i);
+            }
+            
+        }
+        return maxLen;
+    }
+}
+//works for only positives with space complexity O(1)
+
+// User function Template for Java
+
+class Solution {
+    public int longestSubarray(int[] arr, int k) {
+        // code here
+        int n=arr.length;
+        int left=0;
+        int right=0;
+        int sum=arr[0];
+        int maxLen=0;
+        for(int i=0;i<n;i++){
+            while(right<n){
+                while(left <=right && sum>k){
+                    sum-=arr[left];
+                    left++;
+                }
+                if(sum==k){
+                    maxLen=Math.max(maxLen,right-left+1);
+                }
+                right++;
+                if(right<n)
+                sum+=arr[right];
+            }
+        }
+        return maxLen;
+    }
+}

@@ -1,0 +1,83 @@
+//unsorted
+import java.util.*;
+
+public class Main {
+    static boolean hasPairWithSumUnsorted(int[] arr, int target) {
+        Set<Integer> seen = new HashSet<>();
+        for (int x : arr) {
+            int complement = target - x;
+            if (seen.contains(complement)) {
+                return true;
+            }
+            seen.add(x);
+        }
+        return false;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        while (t-- > 0) {
+            int n = sc.nextInt();
+            int[] arr = new int[n];
+            int totalSum = 0;
+            for (int i = 0; i < n; i++) {
+                arr[i] = sc.nextInt();
+                totalSum += arr[i];
+            }
+
+            if (totalSum % 2 != 0) {
+                System.out.println("No");
+                continue;
+            }
+
+            if (hasPairWithSumUnsorted(arr, totalSum / 2)) {
+                System.out.println("Yes");
+            } else {
+                System.out.println("No");
+            }
+        }
+    }
+}
+//sorted
+import java.util.*;
+
+public class Main {
+    static boolean hasPairWithSumSorted(int[] arr, int target) {
+        int left = 0, right = arr.length - 1;
+        while (left < right) {
+            int sum = arr[left] + arr[right];
+            if (sum == target) return true;
+            else if (sum < target) left++;
+            else right--;
+        }
+        return false;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        while (t-- > 0) {
+            int n = sc.nextInt();
+            int[] arr = new int[n];
+            int totalSum = 0;
+            for (int i = 0; i < n; i++) {
+                arr[i] = sc.nextInt();
+                totalSum += arr[i];
+            }
+
+            if (totalSum % 2 != 0) {
+                System.out.println("No");
+                continue;
+            }
+
+            Arrays.sort(arr);
+
+            if (hasPairWithSumSorted(arr, totalSum / 2)) {
+                System.out.println("Yes");
+            } else {
+                System.out.println("No");
+            }
+        }
+    }
+}
