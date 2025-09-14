@@ -1,0 +1,24 @@
+class Solution {
+    static ArrayList<Integer> leaders(int arr[]) {
+        // code here
+        int n=arr.length;
+        ArrayList<Integer> leaderss=new ArrayList<>();
+        int maxi=Integer.MIN_VALUE;
+        for(int i=n-1;i>=0;i--){
+            if(arr[i]>=maxi){
+                leaderss.add(arr[i]);
+            }
+            maxi=Math.max(arr[i],maxi);
+        }
+      int l=0;
+      int r=leaderss.size()-1;
+      while(l<r){
+          int temp=leaderss.get(l);
+          leaderss.set(l,leaderss.get(r));
+          leaderss.set(r,temp);
+          l++;
+          r--;
+      }
+       return leaderss;
+    }
+}
