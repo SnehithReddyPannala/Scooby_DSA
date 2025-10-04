@@ -1,0 +1,36 @@
+class Solution {
+    public int minTime(int[] arr, int k) {
+        int n=arr.length;
+        int sum=0;
+        int max=Integer.MIN_VALUE;
+        for(int ele:arr){
+            sum+=ele;
+            max=Math.max(max,ele);
+        }
+        int low=max;
+        int high=sum;
+        int ans=-1;
+        while(low<=high){
+            int mid=(low+high)/2;
+            if(valid(arr,k,mid)){
+                ans=mid;
+                high=mid-1;
+            }else{
+                low=mid+1;
+            }
+        }
+        return ans;
+    }
+    private static boolean valid(int[] arr,int k,int units){
+        int count=1;
+        int sum=0;
+        for(int ele:arr){
+            if(ele+sum>units){
+                count++;
+                sum=0;
+            }
+            sum+=ele;
+        }
+        return count<=k;
+    }
+}

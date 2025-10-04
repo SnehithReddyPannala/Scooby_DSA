@@ -1,0 +1,54 @@
+//Linear search
+class Solution {
+    private static int pow(int a,int b){
+        int ans=1;
+        while(b>0){
+            if((b&1)!=0){
+                ans=(ans*a);
+            }
+            a=a*a;
+            b=b>>1;
+        }
+        return ans;
+    }
+    public int nthRoot(int n, int m) {
+    for(int i=1;i<=m;i++){
+        if(pow(i,n)==m){
+            return i;
+        }else if(pow(i,n)>m){
+            break;
+        }
+    }
+    return -1;
+    }
+}
+//Binary search
+class Solution {
+    private static int pow(int a,int b){
+        int ans=1;
+        while(b>0){
+            if((b&1)!=0){
+                ans=(ans*a);
+            }
+            a=a*a;
+            b=b>>1;
+        }
+        return ans;
+    }
+    public int nthRoot(int n, int m) {
+    int low=1;
+    int high=m;
+    while(low<=high){
+        int mid=(low+high)/2;
+        int val=pow(mid,n);
+        if(val==m){
+            return mid;
+        }else if(val<m){
+            low=mid+1;
+        }else{
+            high=mid-1;
+        }
+    }
+    return -1;
+    }
+}

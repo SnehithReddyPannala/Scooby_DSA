@@ -1,0 +1,37 @@
+class Solution {
+    public int aggressiveCows(int[] stalls, int k) {
+        Arrays.sort(stalls);
+        int n=stalls.length;
+        int max=Integer.MIN_VALUE;
+        int min=Integer.MAX_VALUE;
+        for(int s:stalls){
+            max=Math.max(s,max);
+            min=Math.min(s,min);
+        }
+        int low=1;
+        int ans=0;
+        int high=max-min;
+        while(low<=high){
+            int mid=(low+high)/2;
+            if(canPlace(stalls,k,mid)){
+                ans=mid;
+                low=mid+1;
+            }else{
+                high=mid-1;
+            }
+        }
+        return ans;
+    }
+    private static boolean canPlace(int[] arr,int cows,int dist){
+        int count=1;
+        int last=arr[0];
+        int n=arr.length;
+        for(int i=0;i<n;i++){
+        if(arr[i]-last>=dist){
+            count++;
+            last=arr[i];
+        }
+        }
+        return count>=cows;
+    }
+}

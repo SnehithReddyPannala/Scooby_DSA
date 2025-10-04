@@ -1,0 +1,65 @@
+//brute
+class Solution {
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int n=nums1.length;
+        int m=nums2.length;
+        int[] nums3=new int[n+m];
+        int i=0;
+        int j=0;
+        int p=0;
+        while(i<n && j<m){
+            if(nums1[i]<nums2[j]){
+                nums3[p++]=nums1[i++];
+            }else{
+                nums3[p++]=nums2[j++];
+            }
+        }
+        while(i<n){
+            nums3[p++]=nums1[i++];
+        }
+        while(j<m){
+            nums3[p++]=nums2[j++];
+        }
+        int len=nums3.length;
+        double median=0;
+        if(len%2==0){
+            median=(nums3[len/2]+nums3[(len/2)-1])/2;
+        }else{
+            median=nums3[len/2];
+        }
+        return median;
+    }
+}
+//better
+class Solution {
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int n = nums1.length;
+        int m = nums2.length;
+        int total = n + m;
+        int idx1 = (total - 1) / 2;
+        int idx2 = total / 2;
+
+        int i = 0, j = 0, count = 0;
+        int val1 = 0, val2 = 0;
+
+        while (count <= idx2) {
+            int num;
+            if (i < n && (j >= m || nums1[i] <= nums2[j])) {
+                num = nums1[i++];
+            } else {
+                num = nums2[j++];
+            }
+
+            if (count == idx1) val1 = num;
+            if (count == idx2) val2 = num;
+
+            count++;
+        }
+
+        if (total % 2 == 0)
+            return (val1 + val2) / 2.0;
+        else
+            return val2;
+    }
+}
+

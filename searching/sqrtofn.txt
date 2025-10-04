@@ -1,0 +1,20 @@
+class Solution {
+    int floorSqrt(int n) {
+        int low=0;
+        int high=n;
+         int ans=0;
+        while(low<=high){
+        int mid=(low+high)/2;
+        int sqrt=mid*mid;
+        if(sqrt==n){
+            return mid;
+        }else if(sqrt<n){
+            ans=mid;
+            low=mid+1;
+        }else{
+            high=mid-1;
+        }
+    }
+    return ans;
+    }
+}

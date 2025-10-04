@@ -1,0 +1,38 @@
+
+class Solution {
+    public int rowWithMax1s(int arr[][]) {
+    int n=arr.length;
+    if(n==0)return -1;
+    int m=arr[0].length;
+    int maxOnes=0;
+    int rowIdx=-1;
+    for(int i=0;i<n;i++){
+        int firstIdx=firstOcc(arr[i]);
+        if(firstIdx!=-1){
+          int onesCount=m-firstIdx;
+        if(onesCount>maxOnes){
+            maxOnes=onesCount;
+            rowIdx=i;
+        }
+        }
+    }
+    return rowIdx;
+    }
+    private int firstOcc(int[] row) {
+        int low = 0, high = row.length - 1;
+        int result = -1;
+
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+
+            if (row[mid] == 1) {
+                result = mid;
+                high = mid - 1;
+            } else {
+                low = mid + 1; 
+            }
+        }
+
+        return result;
+    }
+}

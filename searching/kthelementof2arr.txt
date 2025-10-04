@@ -1,0 +1,20 @@
+class Solution {
+    public int kthElement(int a[], int b[], int k) {
+        // code here
+        int n=a.length;
+        int m=b.length;
+        int count=0;
+        int i=0;
+        int j=0;
+        int num=0;
+        while(count<k){
+        if(i<n && (j>=m || a[i]<b[j])){
+            num=a[i++];
+        }else{
+            num=b[j++];
+        }
+        count++;
+        }
+        return num;
+    }
+}
